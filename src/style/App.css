@@ -1,0 +1,450 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
+
+@font-face {
+    font-family: 'Jenna-Sue';
+    src:url('../fonts/Jenna-Sue.ttf.svg#Jenna-Sue') format('svg'),
+        url('../fonts/Jenna-Sue.ttf.woff') format('woff'),
+        url('../fonts/Jenna-Sue.ttf.eot'),
+        url('../fonts/Jenna-Sue.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Text styles */
+
+body {
+  font-family: 'Lato', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+p{
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-family: 'Jenna-Sue', cursive;
+  font-size: 40px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+h2 {
+  font-family: 'Jenna-Sue', cursive;
+  font-size: 50px;
+  text-align: center;
+  letter-spacing: 1px;
+  margin-top: 10px;
+}
+
+h3 {
+  color: #1B798C;
+  margin-bottom: 20px;
+}
+
+h4 {
+  color: #E3725B;
+  margin-top: 20px;
+}
+
+select {
+  width: auto !important;
+}
+
+/* Colors */
+
+.color1 {
+  color:#1B798C;
+}
+
+.color2 {
+  color: #E3725B;
+}
+
+.color3 {
+  color: #3EAB4E;
+}
+
+/* Branding */
+
+.brand {
+  text-align: center;
+}
+
+.logo {
+  background-image: url("../images/logo_xsm.png");
+  background-repeat: none;
+  width: 125px;
+  height: 122px;
+  margin: 20px auto 0 auto;
+}
+
+.brand h1 a {
+  text-decoration: none;
+  color: #1B798C;
+}
+
+.brand h1 a:hover {
+  text-decoration: none;
+  color: #1B798C;
+}
+
+/* Main Image */
+
+.main-image {
+  padding: 0;
+}
+
+.border {
+  background-image: url("../images/border.png");
+  background-repeat: repeat-x;
+  overflow-x: hidden;
+  height: 18px;
+}
+
+/* Index */
+
+.highlight {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.highlight > a {
+  text-decoration: none;
+}
+
+.highlight-circle {
+  border: 2px solid #1B798C;
+  margin: 4px;
+}
+
+.outer-circle {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border: 7px dashed #1B798C;
+  display: inline-block;
+}
+
+.border-color2 {
+  border-color: #E3725B;
+}
+
+.border-color3 {
+  border-color: #3EAB4E;
+}
+
+.highlight-text {
+  display: block;
+  font-size: 24px;
+  margin-top: 5px;
+}
+
+/* News Signup */
+
+.news-signup {
+  background-color: #DD4425;
+  padding: 5px 0 15px 0;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.icon-circle {
+  width: 48px;
+  height: 48px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  background-color: #DD4425;
+  border: 3px solid #fff;
+  text-align: center;
+  margin: 10px auto 0 auto;
+}
+
+.icon-circle > .glyphicon-envelope {
+  font-size: 24px;
+  line-height: 40px;
+  color: #fff;
+}
+
+.news-signup h5 {
+  color: #fff;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+  margin: 15px 0 5px 0;
+}
+
+.news-signup p {
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.news-signup button {
+  background-color: #1B798C;
+  color: #fff;
+  border: 2px solid #fff;
+  width: 140px;
+  margin-top: 10px;
+}
+
+/* Footer */
+
+.footer {
+  background-color: #1B798C;
+  padding: 20px 20px 20px 20px;
+  text-align: center;
+}
+
+.footer > ul {
+  display: block;
+  padding-left: 0px;
+}
+
+.footer > ul > li {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.footer > ul > li > a {
+  font-size: 12px;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+.footer > ul > li > a:hover {
+  color: #E3725B;
+}
+
+.footer > .copyright {
+  font-size: 10px;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+/* About Us */
+
+.media-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  border: 2px solid #fff;
+}
+
+.media-border {
+  width: 204px;
+  height: 204px;
+  border-radius: 100%;
+  border: 2px solid #1B798C;
+  margin: 0 10px 5px 10px;
+}
+
+/* Image Gallery */
+
+.image-gallery-fullscreen-button::before, .image-gallery-play-button::before, .image-gallery-left-nav::before, .image-gallery-right-nav::before {
+  color: rgba(255, 255, 255, 0.5) !important;
+  text-shadow: none !important;
+}
+
+/* .image-gallery-fullscreen-button, .image-gallery-play-button {
+  left: 50%;
+} */
+
+button.image-gallery-right-nav,  button.image-gallery-left-nav {
+   font-size: 4em;
+}
+
+/* Pricing */
+
+.pricing {
+   padding-left: 30px;
+   padding-right: 30px;
+}
+
+.pricing h3 {
+  margin-top: 30px;
+  margin-bottom: 5px;
+}
+
+.pricing h3.sub-head {
+  margin-top: 30px;
+  margin-bottom: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.pricing h4 {
+  margin-top: 25px;
+}
+
+.pricing h5 {
+  font-size: 16px;
+  color: #1B798C;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.pricing h6 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.pricing em {
+  line-height: 30px;
+} 
+
+.pricing .one-col-img {
+  border: 2px solid #E3725B;
+  border-radius:4px;
+  margin: 20px 4px 0 4px;
+}
+
+.foot-note {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.foot-note em {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Book Your Wedding */
+
+.react-datepicker {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 1.1rem !important;
+}
+
+.sm-select {
+  font-size: 10.5px;
+}
+
+.total {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 15px 0;
+}
+
+/* Contact Form */
+
+.contact-map {
+  width: 340px;
+  height: 265px;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+/* Bootstrap tweaks */
+
+.navbar .navbar-nav {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+
+.navbar .navbar-collapse {
+  text-align: center;
+}
+
+.navbar-default {
+  background-image: none;
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  margin-bottom: 5px;
+}
+
+ul.nav.navbar-nav > li > a {
+  color: #E3725B;
+  font-size: 18px;
+  letter-spacing: 1px;
+  padding: 0 15px 0 15px;
+  line-height: 10px;
+}
+
+ul.nav.navbar-nav > li > a:hover {
+  color: #1B798C;
+}
+
+ul.nav.navbar-nav > li {
+  border-right: 3px solid #1B798C;
+}
+
+ul.nav.navbar-nav > li:last-child {
+  border-right: none;
+}
+
+ul.nav.navbar-nav {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.navbar-collapse.collapsing > ul > li, .navbar-collapse.collapse.in > ul > li {
+  border-right: none;
+  margin-left: 80px;
+}
+
+.navbar-collapse.collapsing > ul > li > a, .navbar-collapse.collapse.in > ul > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 20px;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  color:#1B798C;
+  background-color: #fff;
+}
+
+/* Media queries */
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+  h1 {
+    font-size: 52px;
+  }
+
+  .logo {
+    background-image: url("../images/logo_md.png");
+    width: 161px;
+    height: 157px;
+  }
+
+  .sm-select {
+    font-size: 14px;
+  }
+}
+
+/* Small Devices, Tablets */ 
+@media only screen and (min-width : 768px) {
+  .footer > ul > li {
+    display: inline-block;
+    padding: 0 10px 0 10px;
+  }
+
+  .news-signup {
+    padding: 5px;
+    text-align: left;
+  }
+
+  .icon-circle {
+    margin: 14px 0 0 70px;
+    float: right;
+  }
+
+  .news-signup button {
+    margin-top: 17px;
+  }
+
+  .contact-map {
+    width: 400px;
+    height: 300px;
+    margin-top: 0;
+  }
+}
+
+/* Medium Devices, Desktops */
+/*@media only screen and (min-width : 992px) {
+
+}*/
+
