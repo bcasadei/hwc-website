@@ -329,8 +329,8 @@ button.image-gallery-right-nav,  button.image-gallery-left-nav {
 /* Contact Form */
 
 .contact-map {
-  width: 340px;
-  height: 265px;
+  width: 300px;
+  height: 225px;
   margin-top: 20px;
   border-radius: 4px;
 }
@@ -382,7 +382,7 @@ ul.nav.navbar-nav {
 
 .navbar-collapse.collapsing > ul > li, .navbar-collapse.collapse.in > ul > li {
   border-right: none;
-  margin-left: 80px;
+  /* margin-left: 80px; */
 }
 
 .navbar-collapse.collapsing > ul > li > a, .navbar-collapse.collapse.in > ul > li > a {

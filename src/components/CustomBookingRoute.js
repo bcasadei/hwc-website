@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Datepicker from 'react-datepicker';
 import moment from 'moment';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid } from 'react-bootstrap';
 import 'react-datepicker/dist/react-datepicker.css';
 
 class CustomBookingRoute extends Component {

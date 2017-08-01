@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 
 // Import Styles
@@ -27,7 +27,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
   <div>
-    <BrowserRouter>
+    <HashRouter>
       <div>
         <Branding />
         <Navigation />
@@ -43,7 +43,7 @@ ReactDOM.render(
         <NewsSignup />
         <Footer />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   </div>
   , document.getElementById('root'));
 registerServiceWorker();
