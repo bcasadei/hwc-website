@@ -45,7 +45,7 @@ class ContactForm extends Component {
     params.append('phone', this.state.contactPhone);
     params.append('email', this.state.contactEmail);
     params.append('message', this.state.contactMessage);
-    axios.post('http://billcasadei.com/hwc/mailer.php', params)
+    axios.post('https://highlandweddingchapel.com/mailer.php', params)
       .then((response) => {
         let message = response.data
 

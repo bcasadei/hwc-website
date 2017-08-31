@@ -18,7 +18,7 @@
         }
 
         // Set the recipient email address.
-        $recipient = "bill@billcasadei.com";
+        $recipient = "kelly@highlandeventcenter.com";
 
         // Set the email subject.
         $subject = "Highland Wedding Chapel Contact Form Submission -  $name";

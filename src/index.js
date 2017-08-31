@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import promise from 'redux-promise';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.css';
 
 // Import Styles
-// import 'bootstrap/dist/css/bootstrap-theme.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import './style/App.css'
+
+import reducers from './reducers';
 import { 
   Branding, 
   Navigation, 
@@ -22,28 +26,31 @@ import BookingRoute from './components/BookingRoute';
 import CustomBookingRoute from './components/CustomBookingRoute';
 import ContactRoute from './components/ContactRoute';
 
-
 import registerServiceWorker from './registerServiceWorker';
 
+const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+
 ReactDOM.render(
-  <div>
+  <Provider store={createStoreWithMiddleware(reducers)}>
     <HashRouter>
-      <div>
+      <div className="container-fluid">
         <Branding />
         <Navigation />
-        <Switch>
-          <Route path="/contact" component={ContactRoute} />
-          <Route path="/booking/custom" component={CustomBookingRoute} />
-          <Route path="/booking" component={BookingRoute} />
-          <Route path="/pricing" component={PricingRoute} />
-          <Route path="/gallery" component={GalleryRoute} />
-          <Route path="/about" component={AboutRoute} />
-          <Route path="/" component={IndexRoute} />
-        </Switch>
-        <NewsSignup />
-        <Footer />
+          <Switch>
+            <Route path="/booking/custom" component={CustomBookingRoute} />
+            <Route path="/booking" component={BookingRoute} />
+            <Route path="/contact" component={ContactRoute} />
+            <Route path="/pricing" component={PricingRoute} />
+            <Route path="/gallery" component={GalleryRoute} />
+            <Route path="/about" component={AboutRoute} />
+            <Route path="/" component={IndexRoute} />
+          </Switch>
+        <div className="footer-wrapper">
+          <NewsSignup />
+          <Footer />
+        </div>
       </div>
     </HashRouter>
-  </div>
+  </Provider>
   , document.getElementById('root'));
 registerServiceWorker();

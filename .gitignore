@@ -9,6 +9,9 @@
 # production
 /build
 
+# wordpress api
+/wordpress
+
 # misc
 .DS_Store
 .env.local
