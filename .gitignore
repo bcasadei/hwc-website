@@ -12,6 +12,9 @@
 # wordpress api
 /wordpress
 
+# keys
+/public/config
+
 # misc
 .DS_Store
 .env.local

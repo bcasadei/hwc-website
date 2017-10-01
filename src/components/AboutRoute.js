@@ -1,32 +1,31 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchContent } from '../actions'; 
 import { Grid } from 'react-bootstrap';
+import Spinner from 'react-spinkit';
 
 class AboutRoute extends Component {
-  constructor() {
-    super();
-    this.state = {
-      pageContent: ''
-    }
-  }
-
   createMarkup() {
-    return { __html: this.state.pageContent };
+    return { __html: this.props.pageContent };
   }
 
   componentDidMount() {
-    let dataURL = "https://highlandweddingchapel.com/api/wp-json/wp/v2/pages?slug=about-us";
+    const pageQuery = '/pages?slug=about-us';
 
-    fetch(dataURL)
-      .then(res => res.json())
-      .then(res => {
-        const content = res[0].content.rendered;
-        this.setState({
-          pageContent: content
-        })
-      });
+    this.props.fetchContent(pageQuery);
   }
 
   render() {
+    if(!this.props.pageContent) {
+      return (
+        <Spinner 
+          name="line-spin-fade-loader"
+          className="spinner"
+          color="#1b798c"
+        />
+      )
+    }
+
     return(
       <div >
         <div className="border"></div>
@@ -39,4 +38,8 @@ class AboutRoute extends Component {
   
 }
 
-export default AboutRoute;
+function mapStateToProps(state) {
+  return { pageContent: state.pageContent };
+}
+
+export default connect(mapStateToProps, {fetchContent}) (AboutRoute);

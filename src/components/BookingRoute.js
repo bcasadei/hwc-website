@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import _ from 'lodash';
 import { Grid } from 'react-bootstrap';
 import { RenderDatePicker } from './common';
-import { selectPackage, selectDate } from '../actions';
+import { selectPackage } from '../actions';
 
 class BookingRoute extends Component {
 
@@ -18,7 +18,7 @@ class BookingRoute extends Component {
       <div className={className}>
         <label>{field.label}</label>
         <select
-          name="package"
+          name={field.name}
           className="form-control sm-select"
           {...field.input}>
           <option disabled>Choose a Wedding Package...</option>
@@ -41,19 +41,18 @@ class BookingRoute extends Component {
 
   onSubmit(values) {
     console.log(values);
+    console.log(this.props.activePackage)
   }
 
   onPackageChange(value) {
     const { packages, selectPackage } = this.props;
 
-    selectPackage(_.find(packages, {'name': value}));
-  }
-  
-  onDateChange(value) {
-    this.props.selectDate(value);
+    selectPackage(_.find(packages, { 'name': value }));
   }
 
   render() {
+    console.log(this.props);
+
     const { handleSubmit } = this.props;
 
     return (
@@ -70,12 +69,11 @@ class BookingRoute extends Component {
               label="Choose a Date"
               name="date"
               component={RenderDatePicker}
-              onChange={(event) => { this.onDateChange(event._d) }}
             />
             
             <Field 
               label="Choose a Wedding Package"
-              name="package" 
+              name="weddingPackage" 
               component={this.renderSelectField}
               className="form-control sm-select" 
               props={this.props}
@@ -83,7 +81,7 @@ class BookingRoute extends Component {
             />
 
             <div className="total">
-                Total: {this.props.package ? `$${this.props.package.price}` : ''}
+                Total: {this.props.activePackage ? `$${this.props.activePackage.price}` : ''}
             </div>
 
             <button type="submit" className="btn btn-default">Continue</button>
@@ -100,33 +98,35 @@ class BookingRoute extends Component {
 
 function validate(values) {
   const errors = {};
-
   // TODO Add error check to see if date is valid
   // TODO Add error check to see if date is available
   if (!values.date) {
     errors.date = "Select a date to continue!";
   }
-  if (!values.package) {
-    errors.package = "Select a package to continue!";
+  if (values.weddingPackage === 'Choose a Wedding Package...') {
+    errors.weddingPackage = "Select a package to continue!";
   }
   // If errors === {}, form is fine to submit
   // If errors has any properties, form is invalid
   return errors;
 }
 
+const selector = formValueSelector('BookingForm');
+
 function mapStateToProps(state) {
+  const date = selector(state, 'date');
   return {
     packages: state.packages,
-    package: state.activePackage,
-    date: state.activeDate
+    activePackage: state.activePackage,
+    date
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ selectPackage: selectPackage, selectDate: selectDate }, dispatch);
+  return bindActionCreators({ selectPackage: selectPackage }, dispatch);
 }
 
-export default reduxForm({
+export default BookingRoute = reduxForm({
   validate,
   form: 'BookingForm'
 })(

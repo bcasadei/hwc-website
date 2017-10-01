@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm} from 'redux-form';
 import { Grid } from 'react-bootstrap';
 import { RenderDatePicker } from './common';
-import { selectDate, enterGuests } from '../actions';
+import { selectCeremony, selectReception } from '../actions';
 
 class CustomBookingRoute extends Component {
 
@@ -29,8 +30,8 @@ class CustomBookingRoute extends Component {
     )
   }
 
-  renderCeremonyField(field) {
-    const { meta: { touched, error } } = field;
+  renderSelectField(field) {
+    const { meta: { touched, error }, children } = field;
 
     const className = `form-group ${touched && error ? 'has-error' : ''}`
     return (
@@ -38,17 +39,10 @@ class CustomBookingRoute extends Component {
         <label>{field.label}</label>
         <select
           name={field.name}
-          className="form-control sm-select"
+          className={field.className}
           {...field.input}>
           <option disabled>Choose a Location...</option>
-          {field.ceremonyLocations.map(locationOption =>
-            <option
-              value={locationOption.name}
-              key={locationOption.name}
-            >
-              {locationOption.name}
-            </option>
-          )}
+          {children}
         </select>
 
         <div className="help-block">
@@ -58,57 +52,57 @@ class CustomBookingRoute extends Component {
     )
   }
 
-  renderReceptionField(field) {
-    const { meta: { touched, error } } = field;
+  onCeremonyChange(value) {
+    const { ceremonyLocations, selectCeremony } = this.props;
 
-    const className = `form-group ${touched && error ? 'has-error' : ''}`
-    return (
-      <div className={className}>
-        <label>{field.label}</label>
-        <select
-          name={field.name}
-          className="form-control sm-select"
-          {...field.input}>
-          <option disabled>Choose a Location...</option>
-          {field.receptionLocations.map(locationOption =>
-            <option
-              value={locationOption.name}
-              key={locationOption.name}
-            >
-              {locationOption.name}
-            </option>
-          )}
-        </select>
-
-        <div className="help-block">
-          {touched ? error : ''}
-        </div>
-      </div>
-    )
+    selectCeremony(_.find(ceremonyLocations, { 'name': value }));
   }
 
-  onDateChange(value) {
-    this.props.selectDate(value);
+  onReceptionChange(value) {
+    const { receptionLocations, selectReception } = this.props;
+
+    selectReception(_.find(receptionLocations, { 'name': value }));
   }
 
-  onGuestsChange(value) {
-    this.props.enterGuests(value);
+  getTotal(){
+    const { activeCeremony, activeReception } = this.props;
+
+    if(activeCeremony && activeReception) {
+      const ceremony = parseFloat(activeCeremony.price);
+      const reception = parseFloat(activeReception.price);
+      return ceremony + reception;
+    }
+    else if(activeCeremony) {
+      return activeCeremony.price;
+    }
+    else if(activeReception) {
+      return activeReception.price;
+    }
+    else {
+      return '';
+    }
+  }
+
+  onSubmit(values) {
+    console.log(values);
   }
 
   render() {
-    console.log(this.props.guests);
+    console.log(this.props);
+
+    const { handleSubmit } = this.props;
+
     return (
       <div>
       <div className="border"></div>
       <Grid>
         <h3>Book Your Wedding</h3>
         <h4>Select options for your custom wedding package</h4>
-        <form action="">
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
             label="Choose a Date"
             name="date"
             component={RenderDatePicker}
-            onChange={(event) => { this.onDateChange(event._d) }}
           />
 
           <Field
@@ -117,27 +111,47 @@ class CustomBookingRoute extends Component {
             component={this.renderInputField}
             className="form-control sm-input"
             props={this.props}
-            onChange={(event) => { this.onGuestsChange(event.target.value) }}
           />
 
           <Field
             label="Ceremony Location"
             name="ceremony"
-            component={this.renderCeremonyField}
+            component={this.renderSelectField}
             className="form-control sm-select"
             props={this.props}
-          />
+            onChange={(event) => { this.onCeremonyChange(event.target.value) }}
+          >
+            {this.props.ceremonyLocations.map(locationOption =>
+              <option
+                value={locationOption.name}
+                key={locationOption.name}
+              >
+                {locationOption.name}
+              </option>
+            )}
+          </Field>
 
           <Field
             label="Reception Location"
             name="reception"
-            component={this.renderReceptionField}
+            component={this.renderSelectField}
             className="form-control sm-select"
             props={this.props}
-          />
+            onChange={(event) => { this.onReceptionChange(event.target.value) }}
+          >
+            {this.props.receptionLocations.map(locationOption =>
+              <option
+                value={locationOption.name}
+                key={locationOption.name}
+              >
+                {locationOption.name}
+              </option>
+            )}
+          </Field>
 
-          <div className="total">Total:</div>
-          <button type="button" className="btn btn-default">Continue</button>
+          <div className="total">Total: {`$${this.getTotal()}`}
+           </div>
+          <button type="submit" className="btn btn-default">Continue</button>
         </form>
       </Grid>
       
@@ -163,6 +177,14 @@ function validate(values) {
     errors.guests = "Enter a number less than or equal to 200!";
   }
 
+  if (values.ceremony === 'Choose a Location...') {
+    errors.ceremony = "Select a location for your ceremony to continue!";
+  }
+
+  if (values.reception === 'Choose a Location...') {
+    errors.reception = "Select a location for your reception to continue!";
+  }
+
   return errors;
 }
 
@@ -170,13 +192,13 @@ function mapStateToProps(state) {
   return {
     ceremonyLocations: state.ceremonyLocations,
     receptionLocations: state.receptionLocations,
-    date: state.activeDate,
-    guests: state.numberGuests
+    activeCeremony: state.activeCeremony,
+    activeReception: state.activeReception
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ selectDate: selectDate, enterGuests: enterGuests }, dispatch);
+  return bindActionCreators({ selectCeremony: selectCeremony, selectReception: selectReception }, dispatch);
 }
 
 export default reduxForm({

@@ -1,6 +1,30 @@
+import axios from 'axios';
+
+export const FETCH_CONTENT = 'fetch_content';
+export const FETCH_GALLERY = 'fetch_gallery';
 export const SELECT_PACKAGE = 'select_package';
-export const SELECT_DATE = 'select_date';
-export const ENTER_GUESTS = 'enter_guests';
+export const SELECT_CEREMONY = 'select_ceremony';
+export const SELECT_RECEPTION = 'select_reception';
+
+const ROOT_URL = "https://highlandweddingchapel.com/api/wp-json/wp/v2";
+
+export function fetchContent(pageQuery) {
+  const request = axios.get(`${ROOT_URL}${pageQuery}`);
+
+  return {
+    type: FETCH_CONTENT,
+    payload: request
+  }
+}
+
+export function fetchGallery() {
+  const request = axios.get(`${ROOT_URL}/media?parent=13&type=attachment&per_page=100`);
+
+  return {
+    type: FETCH_GALLERY,
+    payload: request
+  }
+}
 
 export function selectPackage(activePackage) {
   return {
@@ -9,16 +33,16 @@ export function selectPackage(activePackage) {
   }
 }
 
-export function selectDate(activeDate) {
+export function selectCeremony(activeCeremony) {
   return {
-    type: SELECT_DATE,
-    payload: activeDate
+    type: SELECT_CEREMONY,
+    payload: activeCeremony
   }
 }
 
-export function enterGuests(numberGuests) {
+export function selectReception(activeReception) {
   return {
-    type: ENTER_GUESTS,
-    payload: numberGuests
+    type: SELECT_RECEPTION,
+    payload: activeReception
   }
 }

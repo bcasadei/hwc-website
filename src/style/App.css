@@ -423,6 +423,12 @@ ul.nav.navbar-nav {
   background-color: #fff;
 }
 
+/* Spinner */
+.spinner {
+  top: 20px !important;
+  left: 50% !important;
+}
+
 /* Media queries */
 
 /* Extra Small Devices, Phones */ 
